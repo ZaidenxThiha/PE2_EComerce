@@ -1,0 +1,53 @@
+@page
+@model Exercise3.RazorApp.Pages.Orders.CreateModel
+@{
+    ViewData["Title"] = "Create Order";
+}
+
+<h1>Create Order</h1>
+
+<form method="post">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Input.AgentId" class="form-label">Agent</label>
+            <select asp-for="Input.AgentId" class="form-select" asp-items="@(new SelectList(Model.Agents, nameof(PE2.ECommerce.Domain.Entities.Agent.AgentId), nameof(PE2.ECommerce.Domain.Entities.Agent.AgentName)))">
+                <option value="">-- Select --</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.OrderDate" class="form-label"></label>
+            <input asp-for="Input.OrderDate" class="form-control" />
+        </div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Input.Notes" class="form-label"></label>
+        <textarea asp-for="Input.Notes" class="form-control"></textarea>
+    </div>
+
+    <h3>Items</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (int i = 0; i < Model.Input.Lines.Count; i++)
+        {
+            <tr>
+                <td>
+                    <select asp-for="Input.Lines[i].ItemId" class="form-select" asp-items="@(new SelectList(Model.Items, nameof(PE2.ECommerce.Domain.Entities.Item.ItemId), nameof(PE2.ECommerce.Domain.Entities.Item.ItemName)))">
+                        <option value="">-- Select --</option>
+                    </select>
+                </td>
+                <td>
+                    <input asp-for="Input.Lines[i].Quantity" class="form-control" />
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <button class="btn btn-success">Save Order</button>
+</form>

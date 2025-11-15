@@ -1,0 +1,86 @@
+@{
+    ViewData["Title"] = "Reports";
+    var orders = (IReadOnlyCollection<PE2.ECommerce.Services.Models.OrderSummaryModel>)ViewBag.Orders;
+    var items = (IReadOnlyCollection<PE2.ECommerce.Services.Models.ItemPerformanceModel>)ViewBag.Items;
+    var agents = (IReadOnlyCollection<PE2.ECommerce.Services.Models.AgentPurchaseModel>)ViewBag.Agents;
+}
+
+<h1>Reports</h1>
+<form method="get" class="row g-3">
+    <div class="col-md-3">
+        <label class="form-label">Month</label>
+        <input type="number" name="month" value="@ViewBag.Month" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Year</label>
+        <input type="number" name="year" value="@ViewBag.Year" class="form-control" />
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+        <button class="btn btn-primary">Load</button>
+    </div>
+</form>
+
+<h2 class="mt-4">Orders</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Order</th>
+        <th>Date</th>
+        <th>Agent</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var order in orders)
+    {
+        <tr>
+            <td>@order.OrderId</td>
+            <td>@order.OrderDate.ToShortDateString()</td>
+            <td>@order.AgentName</td>
+            <td>@order.TotalAmount.ToString("C")</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h2>Best Items</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Revenue</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in items)
+    {
+        <tr>
+            <td>@item.ItemName</td>
+            <td>@item.QuantitySold</td>
+            <td>@item.Revenue.ToString("C")</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h2>Top Agents</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Agent</th>
+        <th>Items Purchased</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var agent in agents)
+    {
+        <tr>
+            <td>@agent.AgentName</td>
+            <td>@agent.ItemsPurchased</td>
+            <td>@agent.TotalAmount.ToString("C")</td>
+        </tr>
+    }
+    </tbody>
+</table>

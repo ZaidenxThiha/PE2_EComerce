@@ -1,0 +1,64 @@
+@page
+@model Exercise3.RazorApp.Pages.Items.IndexModel
+@{
+    ViewData["Title"] = "Items";
+}
+
+<h1>Items</h1>
+
+@if (TempData["Status"] is string status)
+{
+    <div class="alert alert-success">@status</div>
+}
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Stock</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td>@item.ItemName</td>
+            <td>@item.Size</td>
+            <td>@item.UnitInStock</td>
+            <td>@item.UnitPrice.ToString("C")</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h2>Create or Update</h2>
+<form method="post" class="row g-3">
+    <input type="hidden" asp-for="Input.ItemId" />
+    <div class="col-md-6">
+        <label asp-for="Input.ItemName" class="form-label"></label>
+        <input asp-for="Input.ItemName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Input.Size" class="form-label"></label>
+        <input asp-for="Input.Size" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Input.UnitInStock" class="form-label"></label>
+        <input asp-for="Input.UnitInStock" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Input.UnitPrice" class="form-label"></label>
+        <input asp-for="Input.UnitPrice" class="form-control" />
+    </div>
+    <div class="col-12">
+        <label class="form-check">
+            <input asp-for="Input.IsActive" class="form-check-input" />
+            <span class="form-check-label">Active</span>
+        </label>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary">Save</button>
+    </div>
+</form>

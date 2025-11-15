@@ -1,0 +1,37 @@
+@model IEnumerable<PE2.ECommerce.Domain.Entities.Item>
+@{
+    ViewData["Title"] = "Items";
+}
+
+<h1>Items</h1>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add Item</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Stock</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ItemName</td>
+                <td>@item.Size</td>
+                <td>@item.UnitInStock</td>
+                <td>@item.UnitPrice.ToString("C")</td>
+                <td>
+                    <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@item.ItemId">Edit</a>
+                    <form asp-action="Delete" asp-route-id="@item.ItemId" method="post" class="d-inline">
+                        <button class="btn btn-sm btn-danger" onclick="return confirm('Delete item?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

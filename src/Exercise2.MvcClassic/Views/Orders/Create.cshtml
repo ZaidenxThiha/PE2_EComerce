@@ -1,0 +1,50 @@
+@model Exercise2.MvcClassic.Models.OrderViewModel
+@{
+    ViewData["Title"] = "Create Order";
+}
+
+<h1>Create Order</h1>
+<form asp-action="Create" method="post">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="AgentId" class="form-label"></label>
+            <select asp-for="AgentId" class="form-select" asp-items="ViewBag.Agents">
+                <option value="">-- Select --</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="OrderDate" class="form-label"></label>
+            <input asp-for="OrderDate" class="form-control" />
+        </div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label"></label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+    </div>
+    <h3>Lines</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Lines.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <select asp-for="Lines[i].ItemId" class="form-select" asp-items="ViewBag.Items">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input asp-for="Lines[i].Quantity" class="form-control" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-link">Back</a>
+</form>

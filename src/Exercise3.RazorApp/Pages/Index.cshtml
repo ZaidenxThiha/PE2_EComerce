@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="text-center">
+    <h1 class="display-4">PE2 E-Commerce Dashboard</h1>
+</div>
+
+@if (!Model.SessionState.IsAuthenticated)
+{
+    <div class="alert alert-warning mt-4">
+        Please <a asp-page="/Login">log in</a> to see data.
+    </div>
+}
+else
+{
+    <h2 class="mt-4">Recent Orders</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Order #</th>
+            <th>Date</th>
+            <th>Agent</th>
+            <th>Total Items</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var order in Model.RecentOrders)
+        {
+            <tr>
+                <td>@order.OrderId</td>
+                <td>@order.OrderDate.ToShortDateString()</td>
+                <td>@order.Agent?.AgentName</td>
+                <td>@order.Details.Count</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

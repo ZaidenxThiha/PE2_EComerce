@@ -1,0 +1,30 @@
+@model IEnumerable<PE2.ECommerce.Domain.Entities.Agent>
+@{
+    ViewData["Title"] = "Agents";
+}
+
+<h1>Agents</h1>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add Agent</a>
+</p>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var agent in Model)
+    {
+        <tr>
+            <td>@agent.AgentName</td>
+            <td>@agent.Address</td>
+            <td>@agent.Phone</td>
+            <td>@agent.Email</td>
+        </tr>
+    }
+    </tbody>
+</table>

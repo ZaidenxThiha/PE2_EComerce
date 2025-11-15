@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="text-center">
+    <h1 class="display-4">PE2 E-Commerce Portal</h1>
+</div>
+<div class="row mt-4">
+    <div class="col-md-3">
+        <a class="card text-center" asp-controller="Items" asp-action="Index">
+            <div class="card-body">
+                <h3>Items</h3>
+                <p>Manage catalog</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="card text-center" asp-controller="Agents" asp-action="Index">
+            <div class="card-body">
+                <h3>Agents</h3>
+                <p>Manage partners</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="card text-center" asp-controller="Orders" asp-action="Create">
+            <div class="card-body">
+                <h3>Orders</h3>
+                <p>Create and print</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="card text-center" asp-controller="Reports" asp-action="Index">
+            <div class="card-body">
+                <h3>Reports</h3>
+                <p>Best items & agents</p>
+            </div>
+        </a>
+    </div>
+</div>
