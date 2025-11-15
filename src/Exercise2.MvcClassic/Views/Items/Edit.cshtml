@@ -1,0 +1,33 @@
+@model PE2.ECommerce.Domain.Entities.Item
+@{
+    ViewData["Title"] = "Create Item";
+}
+
+<h1>Create Item</h1>
+
+<form asp-action="Create" method="post" class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="ItemName" class="form-label"></label>
+        <input asp-for="ItemName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Size" class="form-label"></label>
+        <input asp-for="Size" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="UnitInStock" class="form-label"></label>
+        <input asp-for="UnitInStock" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="UnitPrice" class="form-label"></label>
+        <input asp-for="UnitPrice" class="form-control" />
+    </div>
+    <div class="col-12 form-check">
+        <input asp-for="IsActive" class="form-check-input" />
+        <label asp-for="IsActive" class="form-check-label"></label>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-link">Back</a>
+    </div>
+</form>

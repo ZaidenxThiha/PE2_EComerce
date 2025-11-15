@@ -1,0 +1,46 @@
+@model PE2.ECommerce.Domain.Entities.Order
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = $"Order {Model.OrderId}";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2>Order #@Model.OrderId</h2>
+        <small>@Model.OrderDate.ToShortDateString()</small>
+    </div>
+    <div class="card-body">
+        <p><strong>Agent:</strong> @Model.Agent?.AgentName</p>
+        <p><strong>Notes:</strong> @Model.Notes</p>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Unit</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var detail in Model.Details)
+                {
+                    <tr>
+                        <td>@detail.Item?.ItemName</td>
+                        <td>@detail.Quantity</td>
+                        <td>@detail.UnitAmount.ToString("C")</td>
+                        <td>@(detail.Quantity * detail.UnitAmount).ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>Total</strong></td>
+                    <td>@Model.Details.Sum(d => d.Quantity * d.UnitAmount).ToString("C")</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<p class="mt-3">
+    <a asp-action="Index" class="btn btn-link">Back to Orders</a>
+</p>
